@@ -1,10 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
 require("dotenv").config();
+
 /* import Routes */
-const authRouter = require("./routes/auth");
-const privateRouter = require("./routes/private");
+const authRouter = require("./routes/auth.route");
 
 const URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT || 5000;
@@ -19,15 +20,15 @@ mongoose.connect(
 );
 
 const app = express();
+
 /* Middleware */
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/auth", authRouter);
-app.use("/api/private", privateRouter);
+app.use("/", authRouter);
 
 app.get("/", (req, res) => {
-  res.send("railway-reservation-system-backend Server is up and Running");
+  res.send("mail-serve-system-backend Server is up and Running");
 });
 const server = app.listen(PORT, () =>
   console.log(`Server running on port ...${PORT}`)
